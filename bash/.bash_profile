@@ -10,7 +10,11 @@ eval "$(rbenv init -)"
   cd "$(dirname $(gem which $1))"
 }
 
+# VIM aliases
+alias vi="vim"
+
 # Git aliases
+alias g="git"
 alias gs="git status"
 alias gd="git diff --patience --ignore-space-change"
 alias gc="git checkout"
