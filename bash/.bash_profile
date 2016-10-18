@@ -1,9 +1,9 @@
-export PATH=/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin
-export BUNDLE_EDITOR=mate
+export BUNDLE_EDITOR=vim
 
-source ~/.profile
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+eval "$(rbenv init -)"
 
 # Take you to the dir of a file in a gem. e.g. `2gem rspec`
 2gem () {
