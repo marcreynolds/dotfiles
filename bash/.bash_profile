@@ -22,6 +22,11 @@ alias ga="git add"
 alias gh="git hist"
 alias gclean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
 
+doxbranch(){
+  git checkout -b mr-`ruby -e 'print (0..9).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`-$1
+}
+alias doxbranch=doxbranch
+
 # fancy ls command
 # -l  long format
 # -F  / after dirs, * after exe, @ after symlink
