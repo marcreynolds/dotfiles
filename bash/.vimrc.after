@@ -1,4 +1,5 @@
-color railscasts2
+colorscheme onedark
+set colorcolumn=80
 au FocusLost * :wa
 
 nmap ,n :NERDTreeFind<CR>

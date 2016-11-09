@@ -23,9 +23,10 @@ alias gh="git hist"
 alias gclean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
 
 doxbranch(){
-  git checkout -b mr-`ruby -e 'print (0..9).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`-$1
+  git checkout -b $1_`ruby -e 'print (0..6).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`
 }
 alias doxbranch=doxbranch
+# alias doxagg='bin/rails r "puts DocNews::FeedEntry.select(\"id\").aggregated.order(\"RAND()\").limit(5).map(&:id).join(\",\")" | pbcopy"
 
 # fancy ls command
 # -l  long format
