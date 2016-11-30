@@ -1,5 +1,9 @@
+" stop NERDTree from auto-refreshing on window focus
+autocmd! AuNERDTreeCmd FocusGained
 colorscheme onedark
 set colorcolumn=80
+set guifont=Menlo\ Regular:h15
+set rtp+=/usr/local/opt/fzf
 au FocusLost * :wa
 
 nmap ,n :NERDTreeFind<CR>
