@@ -25,8 +25,11 @@ alias ga="git add"
 alias gh="git hist"
 alias gclean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
 
+# RSpec aliases
+alias rspec-modified='git diff --name-status | ag -v discussion | ag "^M\s*app/" | sed  "s/app\/\(.*\)\.rb/spec\/\1_spec\.rb/g" | cut -f 2 | xargs rspec'
+
 doxbranch(){
-  git checkout -b mr_$1_`ruby -e 'print (0..6).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`
+  git checkout -b mr-$1-`ruby -e 'print (0..6).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`
 }
 alias doxbranch=doxbranch
 # alias doxagg='bin/rails r "puts DocNews::FeedEntry.select(\"id\").aggregated.order(\"RAND()\").limit(5).map(&:id).join(\",\")" | pbcopy"
