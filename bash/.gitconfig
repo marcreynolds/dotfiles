@@ -1,0 +1,19 @@
+[user]
+	name = Marc Reynolds
+	email = mreynolds@doximity.com
+[core]
+	editor = vim
+[init]
+	templatedir = ~/.git_template
+[alias]
+	ctags = ~.git/hooks/ctags
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  st = status
+  br = branch
+  type = cat-file -t
+  dump = cat-file -p
+[color]
+	ui = auto
+	diff = true
+[push]
+  default = current

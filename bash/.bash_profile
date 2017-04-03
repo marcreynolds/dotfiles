@@ -1,7 +1,8 @@
 export BUNDLE_EDITOR=vim
 export GOPATH=$HOME/Work/go-projects
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
 export DISABLE_SPRING=true
+export QMAKE="/usr/local/opt/qt@5.5/bin/qmake"
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
@@ -26,12 +27,20 @@ alias gh="git hist"
 alias gclean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
 
 # RSpec aliases
-alias rspec-modified='git diff --name-status | ag -v discussion | ag "^M\s*app/" | sed  "s/app\/\(.*\)\.rb/spec\/\1_spec\.rb/g" | cut -f 2 | xargs rspec'
+rspecmodifiedfunction(){
+  SPEC_FILES="$(git diff --name-status ${1:-HEAD} | ag -v "assets/(javascripts|stylesheets)" | ag "^M\s*app/" | cut -f 2 | sed  "s/app\/\(.*\)\.rb/spec\/\1_spec\.rb/g")"
+  echo "RUNNING:"
+  echo "${SPEC_FILES}"
+  echo $SPEC_FILES | xargs rspec
+}
+alias rspec-modified=rspecmodifiedfunction
 
 doxbranch(){
   git checkout -b mr-$1-`ruby -e 'print (0..6).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`
 }
 alias doxbranch=doxbranch
+alias neo4jstart="bundle exec rake neo4j:start[development] neo4j:start[test]"
+alias neo4jstop="bundle exec rake neo4j:stop[development] neo4j:stop[test]"
 # alias doxagg='bin/rails r "puts DocNews::FeedEntry.select(\"id\").aggregated.order(\"RAND()\").limit(5).map(&:id).join(\",\")" | pbcopy"
 
 # fancy ls command
