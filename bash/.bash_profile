@@ -26,6 +26,13 @@ alias ga="git add"
 alias gh="git hist"
 alias gclean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
 
+# brew services aliases
+alias brewstart="brew services list | ag stopped | awk 'NR>0{ print $1 }' | while read in; do brew services start $in; done"
+alias brewstop="brew services list | ag running | awk 'NR>0{ print $1 }' | while read in; do brew services stop $in; done"
+
+# foreman aliases
+alias fs="foreman start -c web=0,server=0,all=1"
+
 # RSpec aliases
 rspecmodifiedfunction(){
   SPEC_FILES="$(git diff --name-status ${1:-HEAD} | ag -v "assets/(javascripts|stylesheets)" | ag "^M\s*app/" | cut -f 2 | sed  "s/app\/\(.*\)\.rb/spec\/\1_spec\.rb/g")"
