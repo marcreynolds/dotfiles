@@ -33,6 +33,9 @@ Plugin 'tpope/vim-fugitive'
 " https://github.com/tpope/vim-rails
 Plugin 'tpope/vim-rails'
 
+" https://github.com/tpope/vim-endwise
+Plugin 'tpope/vim-endwise'
+
 " https://github.com/christoomey/vim-tmux-navigator
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -54,7 +57,11 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'airblade/vim-gitgutter'
 
-Plugin '907th/vim-auto-save'
+Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install -all' }
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'kchmck/vim-coffee-script'
 
 " https://github.com/jeetsukumaran/vim-buffergator
 
@@ -109,6 +116,10 @@ set smartcase   " ... unless they contain at least one capital letter
 
 " NERDTree Open Binding
 nnoremap <Leader>n :NERDTreeToggle<Enter>
+nmap ,n :NERDTreeFind<Enter>
+
+" reload vim settings
+nnoremap <Leader>r :source ~/.vimrc<Enter>
 
 " tmux nav settings
 let g:tmux_navigator_no_mappings = 1
@@ -132,4 +143,55 @@ set wildignore+=*.swp,*~,._*
 set backupdir^=~/.vim/_backup//    " where to put backup files.
 set directory^=~/.vim/_temp//      " where to put swap files.
 
-let g:auto_save = 1
+if executable('ag')
+  let g:ackprg="ag --nocolor --nogroup --column"
+endif
+
+nnoremap <c-t> :FZF<cr>
+nnoremap <c-p> :FZF<cr>
+
+" column highlighting
+set cursorcolumn
+set cursorline
+set colorcolumn=80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+" always show the status line
+set laststatus=2
+
+" set up the clipboard
+set clipboard=unnamed
+noremap <Leader>y "*y
+noremap <Leader>Y "*Y
+noremap <Leader>p "*p
+
+" auto-reload modified changes
+:au FocusGained,BufEnter * :silent! !
+
+" auto-save changes
+:au FocusLost,WinLeave,CompleteDone * :silent! w
+
+" don't make a backup when overwriting files
+set nobackup
+set nowritebackup
+set nornu
+function! NumberToggle()
+  if(&rnu == 1)
+    set nornu
+  else
+    set rnu
+  endif
+endfunc
+
+noremap <Leader>l :call NumberToggle()<cr>
+
+" FZF lovin'
+let g:fzf_files_options =
+  \ '--reverse ' .
+  \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+"nnoremap <leader>f :Files<cr>
+"nnoremap <leader>dc :Files app/controllers<cr>
+"nnoremap <leader>dm :Files app/models<cr>
+"nnoremap <leader>dv :Files app/views<cr>
+"nnoremap <leader>ds :Files spec/<cr>

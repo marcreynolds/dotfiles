@@ -19,3 +19,6 @@ nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 " cnoreabbrev aG Ack
 " cnoreabbrev Ag Ack
 " cnoreabbrev AG Ack
+set cursorcolumn
+let g:auto_save = 1 " enable AutoSave on Vim Startup
+let g:auto_save_on_insert = 0 " disable AutoSave while in instert mode

@@ -3,8 +3,11 @@ export GOPATH=$HOME/Work/go-projects
 export PATH=$PATH:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
 export DISABLE_SPRING=true
 export QMAKE="/usr/local/opt/qt@5.5/bin/qmake"
+export EDITOR="vim"
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+
+source "$HOME/.tmuxinator.bash"
 
 eval "$(rbenv init -)"
 
