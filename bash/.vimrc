@@ -63,6 +63,9 @@ Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'kchmck/vim-coffee-script'
 
+set runtimepath^=~/.vim/bundle/auto_autoread/plugin/auto_autoread.vim
+
+"Plugin 'marcreynolds/auto_autoread'
 " https://github.com/jeetsukumaran/vim-buffergator
 
 " All of your Plugins must be added before the following line
@@ -156,6 +159,14 @@ set cursorline
 set colorcolumn=80
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
+
+" change up the cursors
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"let g:togglecursor_default = 'underline'
+"let g:togglecursor_leave = 'block'
+"let g:togglecursor_insert = 'blinking_line'
 
 " always show the status line
 set laststatus=2
