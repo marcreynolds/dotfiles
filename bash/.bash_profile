@@ -1,7 +1,8 @@
 export BUNDLE_EDITOR=vim
 export GOPATH=$HOME/Work/go-projects
 export PATH=$PATH:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
-export DISABLE_SPRING=true
+export PATH="/usr/local/sbin:$PATH"
+#export DISABLE_SPRING=true
 export QMAKE="/usr/local/opt/qt@5.5/bin/qmake"
 export EDITOR="vim"
 
@@ -18,6 +19,9 @@ eval "$(rbenv init -)"
 
 # docker aliases
 alias dk="docker-compose -f ~/Work/docker-compose/docker-compose.yml"
+alias dc="docker-compose"
+alias ds="docker-sync"
+alias docker-stats="docker stats $(docker ps --format={{.Names}})"
 
 # VIM aliases
 alias vi="vim"
@@ -31,6 +35,7 @@ alias gb="git branch"
 alias ga="git add"
 alias gh="git hist"
 alias gclean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
+alias gsync='git checkout --quiet HEAD; git fetch origin master:master; git checkout --quiet -'
 
 # brew services aliases
 alias brewstart="brew services list | ag stopped | awk 'NR>0{ print $1 }' | while read in; do brew services start $in; done"
@@ -81,45 +86,48 @@ source /usr/local/etc/bash_completion.d/git-prompt.sh
 # Shortcut for bundle exec
 alias be="bundle exec"
 
+# shortcut for checking on timemachine
+alias tmsnoop="sudo fs_usage -w -f pathname | grep backupd | grep '(R___'"
+
 ## Prompt
-#  function parse_git_branch {
-#    branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
-#    if [ "HEAD" = "$branch" ]; then
-#      echo "(no branch)"
-#    else
-#      echo "$branch"
-#    fi
-#  }
+#function parse_git_branch {
+#  branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
+#  if [ "HEAD" = "$branch" ]; then
+#    echo "(no branch)"
+#  else
+#    echo "$branch"
+#  fi
+#}
 #
-#  function prompt_segment {
-#    # for colours: http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-#    # change the 37 to change the foreground
-#    # change the 45 to change the background
-#    if [[ ! -z "$1" ]]; then
-#      echo "\[\033[${2:-30};46m\]${1}\[\033[0m\]"
-#    fi
-#  }
+#function prompt_segment {
+#  # for colours: http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+#  # change the 37 to change the foreground
+#  # change the 45 to change the background
+#  if [[ ! -z "$1" ]]; then
+#    echo "\[\033[${2:-30};46m\]${1}\[\033[0m\]"
+#  fi
+#}
 #
-#  function build_mah_prompt {
-#    # time
-#    ps1="$(prompt_segment " \@ ")"
+#function build_mah_prompt {
+#  # time
+#  ps1="$(prompt_segment " \@ ")"
 #
-#    # cwd
-#    ps1="${ps1} $(prompt_segment " \w ")"
+#  # cwd
+#  ps1="${ps1} $(prompt_segment " \w ")"
 #
-#    # git branch
-#    git_branch=`parse_git_branch`
-#    if [[ ! -z "$git_branch" ]]
-#    then
-#      ps1="${ps1} $(prompt_segment " $git_branch " 30)"
-#    fi
+#  # git branch
+#  git_branch=`parse_git_branch`
+#  if [[ ! -z "$git_branch" ]]
+#  then
+#    ps1="${ps1} $(prompt_segment " $git_branch " 30)"
+#  fi
 #
-#    # next line
-#    ps1="${ps1}\n⚡ "
+#  # next line
+#  ps1="${ps1}\n⚡ "
 #
-#    # set prompt output
-#    PS1="$ps1"
-#  }
+#  # set prompt output
+#  PS1="$ps1"
+#}
 
 # Colours
         RED="\[\033[0;31m\]"
@@ -213,20 +221,27 @@ function parse_git_branch {
   fi
 }
 
+function background_tasks {
+  has_jobs="$(jobs -p)"
+  echo "${LIGHT_RED} ${has_jobs:+\j bg task}${COLOR_NONE}"
+}
+
 #sets what the prompt should be
 function prompt_func() {
   previous_return_value=$?;
   prompt="$(parse_git_branch)${COLOR_NONE}"
   if test $previous_return_value -eq 0
   then
-    PS1="${GREEN}➜  ${COLOR_NONE}${prompt}${GREEN} \$${COLOR_NONE} "
+    PS1="${GREEN}➜  ${COLOR_NONE}${prompt}${GREEN}${COLOR_NONE}$(background_tasks)\n\$ "
   else
-    PS1="${RED}➜  ${COLOR_NONE}${prompt}${RED} \$${COLOR_NONE} "
+    PS1="${RED}➜  ${COLOR_NONE}${prompt}${RED}${COLOR_NONE}$(background_tasks)\n\$ "
   fi
 }
 
 PROMPT_COMMAND=prompt_func
 
-  #PROMPT_COMMAND="build_mah_prompt; $PROMPT_COMMAND"
+#PROMPT_COMMAND="build_mah_prompt; $PROMPT_COMMAND"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+[[ -f ~/.bashenv.local ]] && source ~/.bashenv.local

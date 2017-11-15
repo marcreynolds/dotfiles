@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+set re=1
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -29,6 +30,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " https://github.com/tpope/vim-fugitive
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 
 " https://github.com/tpope/vim-rails
 Plugin 'tpope/vim-rails'
@@ -48,7 +50,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " http://www.vim.org/scripts/script.php?script_id=508
 " Press <c-w>o : the current window zooms into a full screen
 " Press <c-w>o again: the previous set of windows is restored
-Plugin 'ZoomWin'
+"Plugin 'ZoomWin'
 
 " https://github.com/flazz/vim-colorschemes/tree/master/colors
 Plugin 'flazz/vim-colorschemes'
@@ -62,6 +64,19 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install -all' }
 Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'kchmck/vim-coffee-script'
+
+Plugin 'posva/vim-vue'
+
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
+
+"" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 set runtimepath^=~/.vim/bundle/auto_autoread/plugin/auto_autoread.vim
 
@@ -84,6 +99,21 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 colorscheme onedark
+" colorscheme sole
+
+"function! s:SwitchStyle()
+  "if exists('g:current_colorscheme')
+    "if g:current_colorscheme == 'onedark'
+      "let g:current_colorscheme = 'sole'
+    "else
+      "let g:current_colorscheme = 'onedark'
+    "endif
+    "colorscheme g:current_colorscheme
+  "else
+    "let g:current_colorscheme = 'onedark'
+  "endif
+"endfunction
+"map <silent> <F6> :call <SID>SwitchStyle()<CR>
 
 set number            " Show line numbers
 set ruler             " Show line and column number
@@ -156,9 +186,9 @@ nnoremap <c-p> :FZF<cr>
 " column highlighting
 set cursorcolumn
 set cursorline
-set colorcolumn=80
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+set colorcolumn=120
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
 
 " change up the cursors
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -177,11 +207,17 @@ noremap <Leader>y "*y
 noremap <Leader>Y "*Y
 noremap <Leader>p "*p
 
+" set up media next/previous for quickfix list navigation
+noremap <Leader><F9> :cnext<Enter>
+noremap <Leader><F7> :cprev<Enter>
+
 " auto-reload modified changes
-:au FocusGained,BufEnter * :silent! !
+" doesn't seem to work
+" :au FocusGained,BufEnter * :silent! !
 
 " auto-save changes
-:au FocusLost,WinLeave,CompleteDone * :silent! w
+" disabling to check for performance gains
+" :au FocusLost,WinLeave,CompleteDone * :silent! w
 
 " don't make a backup when overwriting files
 set nobackup

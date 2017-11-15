@@ -33,12 +33,12 @@ root: ~/Work
 windows:
   - working:
   - docker:
-      layout: even-verticacl
+      layout: even-vertical
       panes:
         - logs:
           - cd doximity
           - docker-compose up -d
-          - docker-compose logs -f
+          #- docker-compose logs -f
         - stats:
           - cd doximity
           - sleep 10
@@ -48,7 +48,7 @@ windows:
       panes:
         - doximity:
           - cd doximity
-          - rails s webrick -p 5000
+          - env MESSAGING_ENABLED=true rails s webrick -p 5000
         - activities:
           - cd activities
           - rails s webrick -p 5150
