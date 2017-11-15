@@ -1,7 +1,8 @@
 export BUNDLE_EDITOR=vim
-export GOPATH=$HOME/Work/go-projects
-export PATH=$PATH:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
-export PATH="/usr/local/sbin:$PATH"
+#LOCALS:
+## export GOPATH=$HOME/Work/go-projects
+## export PATH=$PATH:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
+## export PATH="/usr/local/sbin:$PATH"
 #export DISABLE_SPRING=true
 export QMAKE="/usr/local/opt/qt@5.5/bin/qmake"
 export EDITOR="vim"
@@ -79,9 +80,10 @@ function fullpath {
   ' "$@"
 }
 
+## MOVE TO LOCAL
 # Enable git's tab-completion library
-source /usr/local/etc/bash_completion.d/git-completion.bash
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+## source /usr/local/etc/bash_completion.d/git-completion.bash
+## source /usr/local/etc/bash_completion.d/git-prompt.sh
 
 # Shortcut for bundle exec
 alias be="bundle exec"
@@ -242,6 +244,7 @@ PROMPT_COMMAND=prompt_func
 
 #PROMPT_COMMAND="build_mah_prompt; $PROMPT_COMMAND"
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# MOVE TO LOCAL
+# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 [[ -f ~/.bashenv.local ]] && source ~/.bashenv.local
