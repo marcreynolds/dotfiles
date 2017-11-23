@@ -19,9 +19,6 @@ eval "$(rbenv init -)"
 }
 
 # docker aliases
-alias dk="docker-compose -f ~/Work/docker-compose/docker-compose.yml"
-alias dc="docker-compose"
-alias ds="docker-sync"
 alias docker-stats="docker stats $(docker ps --format={{.Names}})"
 
 # VIM aliases
