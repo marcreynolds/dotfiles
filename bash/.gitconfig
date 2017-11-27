@@ -3,7 +3,7 @@
 	email = mreynolds@doximity.com
 [core]
 	editor = vim
-	excludesfile = /Users/mreynolds/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [init]
 	templatedir = ~/.git_template
 [alias]
