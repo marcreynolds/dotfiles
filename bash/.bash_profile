@@ -79,8 +79,8 @@ function fullpath {
 
 ## MOVE TO LOCAL
 # Enable git's tab-completion library
-## source /usr/local/etc/bash_completion.d/git-completion.bash
-## source /usr/local/etc/bash_completion.d/git-prompt.sh
+source $HOME/git-completion.bash
+source $HOME/git-prompt.sh
 
 # Shortcut for bundle exec
 alias be="bundle exec"
