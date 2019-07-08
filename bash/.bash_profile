@@ -16,8 +16,8 @@ source "$HOME/.tmuxinator.bash"
   cd "$(dirname $(gem which $1))"
 }
 
-# docker aliases
-alias docker-stats="docker stats $(docker ps --format={{.Names}})"
+#docker aliases
+#alias docker-stats="docker stats $(docker ps --format={{.Names}})"
 
 # VIM aliases
 alias vi="vim"
@@ -242,4 +242,5 @@ PROMPT_COMMAND=prompt_func
 # MOVE TO LOCAL
 # test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+[[ -f ~/.bash_credentials ]] && source ~/.bash_credentials
 [[ -f ~/.bashenv.local ]] && source ~/.bashenv.local
