@@ -1,20 +1,29 @@
 [user]
-	name = Marc Reynolds
-	email = mreynolds@doximity.com
+  name = Marc Reynolds
+  email = mreynolds@doximity.com
 [core]
-	editor = vim
-	excludesfile = ~/.gitignore_global
+  editor = vim
+  excludesfile = ~/.gitignore_global
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template
 [alias]
-	ctags = ~.git/hooks/ctags
+  ctags = ~.git/hooks/ctags
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   st = status
   br = branch
   type = cat-file -t
   dump = cat-file -p
 [color]
-	ui = auto
-	diff = true
+  ui = auto
+  diff = true
 [push]
   default = current
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+[pull]
+  default = current
+[diff]
+  algorithm = histogram
