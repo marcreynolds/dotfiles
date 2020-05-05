@@ -56,6 +56,8 @@ myip(){
   dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
 }
 
+function agr { ag -0 -l "$1" | AGR_FROM="$1" AGR_TO="$2" xargs -0 perl -pi -e 's/$ENV{AGR_FROM}/$ENV{AGR_TO}/g'; }
+
 alias doxbranch=doxbranch
 alias neo4jstart="bundle exec rake neo4j:start[development] neo4j:start[test]"
 alias neo4jstop="bundle exec rake neo4j:stop[development] neo4j:stop[test]"
