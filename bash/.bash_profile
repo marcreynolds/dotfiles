@@ -248,4 +248,5 @@ PROMPT_COMMAND=prompt_func
 # MOVE TO LOCAL
 # test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+[[ -f ~/.bash_credentials ]] && source ~/.bash_credentials
 [[ -f ~/.bashenv.local ]] && source ~/.bashenv.local
