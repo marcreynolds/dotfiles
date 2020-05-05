@@ -40,6 +40,10 @@ rspecmodifiedfunction(){
 }
 alias rspec-modified=rspecmodifiedfunction
 
+modified-specs(){
+  git diff --name-status ${1:-HEAD} | ag -v "assets/(javascripts|stylesheets)" | ag "^M\s*app/" | cut -f 2 | sed  "s/app\/\(.*\)\.rb/spec\/\1_spec\.rb/g"
+}
+
 doxbranch(){
   git checkout -b mr-$1-`ruby -e 'print (0..6).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`
 }
