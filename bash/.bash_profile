@@ -47,6 +47,11 @@ modified-specs(){
 doxbranch(){
   git checkout -b mr-$1-`ruby -e 'print (0..6).reduce(""){ |x| "#{x}#{Random.new.rand(9)}" }'`
 }
+
+ptbranch(){
+  git checkout -b $1-mr-$2
+}
+
 alias doxbranch=doxbranch
 alias neo4jstart="bundle exec rake neo4j:start[development] neo4j:start[test]"
 alias neo4jstop="bundle exec rake neo4j:stop[development] neo4j:stop[test]"
