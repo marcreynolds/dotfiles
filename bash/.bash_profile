@@ -52,6 +52,10 @@ ptbranch(){
   git checkout -b $1-mr-$2
 }
 
+myip(){
+  dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
+}
+
 alias doxbranch=doxbranch
 alias neo4jstart="bundle exec rake neo4j:start[development] neo4j:start[test]"
 alias neo4jstop="bundle exec rake neo4j:stop[development] neo4j:stop[test]"
