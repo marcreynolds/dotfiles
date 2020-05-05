@@ -10,9 +10,6 @@ source "$HOME/.tmuxinator.bash"
   cd "$(dirname $(gem which $1))"
 }
 
-# docker aliases
-alias docker-stats="docker stats $(docker ps --format={{.Names}})"
-
 # VIM aliases
 alias vi="vim"
 
