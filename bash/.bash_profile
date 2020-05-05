@@ -1,10 +1,4 @@
 export BUNDLE_EDITOR=vim
-#LOCALS:
-## export GOPATH=$HOME/Work/go-projects
-## export PATH=$PATH:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
-## export PATH="/usr/local/sbin:$PATH"
-#export DISABLE_SPRING=true
-export QMAKE="/usr/local/opt/qt@5.5/bin/qmake"
 export EDITOR="vim"
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
